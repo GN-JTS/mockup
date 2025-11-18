@@ -1,3 +1,4 @@
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { UserRole, RoleDisplayNames } from "@/utils/constants";
 import {
@@ -17,6 +18,7 @@ import {
 
 const Sidebar = () => {
   const { user, logout } = useAuth();
+  const location = useLocation();
 
   if (!user) return null;
 
@@ -130,15 +132,20 @@ const Sidebar = () => {
       <nav className="flex-1 p-4 space-y-1">
         {filteredMenuItems.map((item) => {
           const Icon = item.icon;
+          const isActive = location.pathname === item.path;
           return (
-            <a
+            <Link
               key={item.path}
-              href={item.path}
-              className="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+              to={item.path}
+              className={`flex items-center px-4 py-3 rounded-lg transition-colors ${
+                isActive
+                  ? "bg-primary-100 text-primary-700 font-medium"
+                  : "text-gray-700 hover:bg-gray-100"
+              }`}
             >
               <Icon className="h-5 w-5 mr-3" />
               <span>{item.label}</span>
-            </a>
+            </Link>
           );
         })}
       </nav>
