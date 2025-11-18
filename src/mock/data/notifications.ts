@@ -1,0 +1,66 @@
+import { Notification } from "@/types";
+
+export const mockNotifications: Notification[] = [
+  {
+    id: "notif-1",
+    userId: "user-13",
+    type: "appointment_proposed",
+    title: "New Time Proposed",
+    message: "William Mentor has proposed a new time for your appointment",
+    read: false,
+    createdAt: "2024-11-15T14:00:00Z",
+    actionUrl: "/appointments/req-2",
+  },
+  {
+    id: "notif-2",
+    userId: "user-13",
+    type: "evaluation_complete",
+    title: "Evaluation Complete",
+    message: "Your evaluation for Work Log Completion has been completed",
+    read: false,
+    createdAt: "2024-10-15T10:30:00Z",
+    actionUrl: "/evaluations/eval-4",
+  },
+  {
+    id: "notif-3",
+    userId: "user-14",
+    type: "assignment_request",
+    title: "New Assignment Request",
+    message: "You have a new standard assignment request pending your approval",
+    read: false,
+    createdAt: "2024-11-09T14:30:00Z",
+    actionUrl: "/assignments/assign-2",
+  },
+  {
+    id: "notif-4",
+    userId: "user-3",
+    type: "assignment_request",
+    title: "Assignment Request Pending",
+    message:
+      "Lisa Training has submitted an assignment request for Alex Employee",
+    read: false,
+    createdAt: "2024-11-10T09:15:00Z",
+    actionUrl: "/assignments/assign-1",
+  },
+  {
+    id: "notif-5",
+    userId: "user-7",
+    type: "appointment_request",
+    title: "New Appointment Request",
+    message: "Alex Employee has requested an appointment for Nov 18",
+    read: false,
+    createdAt: "2024-11-15T09:05:00Z",
+    actionUrl: "/appointments/req-1",
+  },
+  {
+    id: "notif-6",
+    userId: "user-14",
+    type: "certificate_issued",
+    title: "Certificate Issued",
+    message:
+      "Congratulations! Your Basic Operations Certification has been issued",
+    read: true,
+    createdAt: "2024-10-15T15:00:00Z",
+    actionUrl: "/certificates/cert-1",
+  },
+];
