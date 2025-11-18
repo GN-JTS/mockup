@@ -183,6 +183,9 @@ const AppRoutes = () => {
             element={<CompanyStructure />}
           />
 
+          {/* Settings Route */}
+          <Route path="settings" element={<AdminDashboard />} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
