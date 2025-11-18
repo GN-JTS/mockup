@@ -39,6 +39,12 @@ The application will be available at `http://localhost:5173`
 npm run build
 ```
 
+### Deployment
+
+This project includes automatic deployment to Netlify on every push to the `main` branch via GitHub Actions.
+
+For deployment setup instructions, see [NETLIFY_DEPLOYMENT.md](NETLIFY_DEPLOYMENT.md).
+
 ## 🔑 Demo Login Credentials
 
 The application includes quick login options for all roles. Use any of the following emails with password: `password`
