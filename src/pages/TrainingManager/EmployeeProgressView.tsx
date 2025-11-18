@@ -131,7 +131,8 @@ const EmployeeProgressView = () => {
         `   Mastered: ${
           progressData.filter(
             (p) =>
-              p.mentorStatus === "mastered" || p.evaluatorStatus === "mastered"
+              p.mentorStatus === EvaluationStatus.MASTER ||
+              p.evaluatorStatus === EvaluationStatus.MASTER
           ).length
         }`
       );

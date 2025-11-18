@@ -242,6 +242,57 @@ const MentorDashboard = () => {
     }
   };
 
+  const handleProposeNewTime = async (requestId: string) => {
+    if (!user) return;
+
+    try {
+      const request = appointmentRequests.find((r) => r.id === requestId);
+      if (!request) {
+        console.error("Request not found");
+        return;
+      }
+
+      // Calculate a new date (1 day later as default)
+      const requestedDate = new Date(request.requestedDate);
+      requestedDate.setDate(requestedDate.getDate() + 1);
+      const newDate = requestedDate.toISOString().split("T")[0];
+      const newStartTime = request.requestedStartTime;
+      const newEndTime = request.requestedEndTime;
+
+      await mockApi.proposeNewAppointmentTime(
+        requestId,
+        newDate,
+        newStartTime,
+        newEndTime
+      );
+
+      // Send notification to employee
+      const employee = await mockApi.getUserById(request.employeeId);
+      if (employee) {
+        await mockApi.createNotification({
+          id: `notif-${Date.now()}-${Math.random()}`,
+          userId: employee.id,
+          type: "appointment_proposed",
+          title: "New Time Proposed",
+          message: `${user.name} has proposed a new time for your ${
+            request.type === "mentorship" ? "mentorship" : "evaluation"
+          } appointment. Please review and respond.`,
+          relatedId: requestId,
+          createdAt: new Date().toISOString(),
+          read: false,
+        });
+      }
+
+      // Refresh appointment requests
+      const requests = await mockApi.getAppointmentRequestsByMentor(user.id);
+      setAppointmentRequests(
+        requests.filter((r) => r.status === AppointmentStatus.PENDING)
+      );
+    } catch (error) {
+      console.error("Failed to propose new time:", error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">

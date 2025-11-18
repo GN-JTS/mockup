@@ -12,26 +12,18 @@ import {
   EmployeePromotion,
   EmployeeProgress,
 } from "@/types";
-import {
-  UserRole,
-  EvaluationStatus,
-  PromotionStatusColors,
-  PromotionStatusNames,
-} from "@/utils/constants";
+import { UserRole, EvaluationStatus } from "@/utils/constants";
 import {
   UserGroupIcon,
-  ClockIcon,
-  CheckCircleIcon,
-  XCircleIcon,
   ChartBarIcon,
   BellIcon,
-  AcademicCapIcon,
   CogIcon,
   FunnelIcon,
   MagnifyingGlassIcon,
   EyeIcon,
   CheckIcon,
   XMarkIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 
 export default function ManagerDashboard() {
@@ -463,10 +455,7 @@ export default function ManagerDashboard() {
     );
   }).length;
 
-  const rejectedCount = promotions.filter(
-    (p) =>
-      p.status === "rejected" && employees.some((e) => e.id === p.employeeId)
-  ).length;
+  // Removed unused rejectedCount variable
 
   // Show loading while auth is initializing
   if (authLoading || loading) {

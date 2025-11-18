@@ -106,8 +106,8 @@ const EmployeeDashboard = () => {
         mockApi.getCertificatesByEmployee(user.id),
       ]);
 
-      setCurrentJobTitle(jobTitleData);
-      setCurrentGrade(gradeData);
+      setCurrentJobTitle(jobTitleData || null);
+      setCurrentGrade(gradeData || null);
       setCertificates(certsData);
 
       // Find pending employee approvals

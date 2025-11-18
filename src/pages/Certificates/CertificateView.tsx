@@ -2,14 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { mockApi } from "@/mock/services/mockApi";
-import {
-  Certificate,
-  JobTitle,
-  Grade,
-  Subtask,
-  Task,
-  EmployeePromotion,
-} from "@/types";
+import { Certificate, JobTitle, Grade, Subtask, Task } from "@/types";
 import { formatDate } from "@/utils/formatters";
 import {
   ArrowLeftIcon,
@@ -25,7 +18,7 @@ const CertificateView = () => {
   const [certificate, setCertificate] = useState<Certificate | null>(null);
   const [jobTitle, setJobTitle] = useState<JobTitle | null>(null);
   const [grade, setGrade] = useState<Grade | null>(null);
-  const [promotion, setPromotion] = useState<EmployeePromotion | null>(null);
+  // Removed unused promotion state
   const [tasks, setTasks] = useState<Task[]>([]);
   const [subtasks, setSubtasks] = useState<Subtask[]>([]);
   const [loading, setLoading] = useState(true);
@@ -43,24 +36,18 @@ const CertificateView = () => {
           return;
         }
 
-        const [
-          jobTitleData,
-          gradeData,
-          promotionData,
-          tasksData,
-          subtasksData,
-        ] = await Promise.all([
-          mockApi.getJobTitleById(cert.jobTitleId),
-          mockApi.getGradeById(cert.gradeId),
-          mockApi.getEmployeePromotionById(cert.promotionId),
-          mockApi.getTasks(),
-          mockApi.getSubtasks(),
-        ]);
+        const [jobTitleData, gradeData, tasksData, subtasksData] =
+          await Promise.all([
+            mockApi.getJobTitleById(cert.jobTitleId),
+            mockApi.getGradeById(cert.gradeId),
+            mockApi.getTasks(),
+            mockApi.getSubtasks(),
+          ]);
 
         setCertificate(cert);
-        setJobTitle(jobTitleData);
-        setGrade(gradeData);
-        setPromotion(promotionData);
+        setJobTitle(jobTitleData || null);
+        setGrade(gradeData || null);
+        // promotionData is loaded but not used in UI
         setTasks(tasksData);
         setSubtasks(subtasksData);
       } catch (error) {

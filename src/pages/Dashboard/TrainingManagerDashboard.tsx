@@ -86,7 +86,7 @@ const TrainingManagerDashboard = () => {
 
       setEmployees(scopedEmployees);
       setJobTitles(jobTitlesData);
-      setGrades(gradesData.sort((a, b) => a.levelIndex - b.levelIndex));
+      setGrades(gradesData.sort((a, b) => a.name.localeCompare(b.name)));
       setDepartments(departmentsData);
       setSections(sectionsData);
       setPromotions(promotionsData);
@@ -157,7 +157,7 @@ const TrainingManagerDashboard = () => {
 
   // Apply filters
   const filteredEmployees = employees.filter((emp) => {
-    const details = getEmployeeDetails(emp);
+    getEmployeeDetails(emp); // Get details for filtering logic
 
     // Search filter
     if (

@@ -71,8 +71,8 @@ const RequirementsTreeView = () => {
           ]);
 
           setProgress(progressData);
-          setTargetJobTitle(jobTitle);
-          setTargetGrade(grade);
+          setTargetJobTitle(jobTitle || null);
+          setTargetGrade(grade || null);
           setViewMode("my_requirements");
         }
       }

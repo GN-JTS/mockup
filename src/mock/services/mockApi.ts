@@ -19,7 +19,7 @@ import {
   mockSectionJobTitleMappings,
   mockSectionGradeMappings,
 } from "../data";
-import { AppointmentStatus } from "@/utils/constants";
+import { AppointmentStatus, EvaluationStatus } from "@/utils/constants";
 
 // Simulate API delay
 const delay = (ms: number = 500) =>
@@ -593,7 +593,8 @@ export const mockApi = {
       const progressRecords = mockEmployeeProgress.filter(
         (ep) =>
           ep.promotionId === promotion.id &&
-          (ep.mentorStatus === "mastered" || ep.evaluatorStatus === "mastered")
+          (ep.mentorStatus === EvaluationStatus.MASTER ||
+            ep.evaluatorStatus === EvaluationStatus.MASTER)
       );
       progressRecords.forEach((pr) => {
         if (!masteredSubtasks.includes(pr.subtaskId)) {

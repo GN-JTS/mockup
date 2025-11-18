@@ -13,7 +13,6 @@ import { useNotifications } from "@/context/NotificationContext";
 import {
   PlusIcon,
   PencilIcon,
-  TrashIcon,
   TableCellsIcon,
   BriefcaseIcon,
   TrophyIcon,

@@ -1,6 +1,5 @@
 import {
   UserRole,
-  AssignmentStatus,
   EvaluationStatus,
   AppointmentStatus,
   AppointmentType,

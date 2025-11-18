@@ -71,6 +71,10 @@ const PromotionProgress = () => {
 
     try {
       const promotionData = await mockApi.getEmployeePromotionById(promotionId);
+      if (!promotionData) {
+        console.error("Promotion not found");
+        return;
+      }
       setPromotion(promotionData);
 
       const [
@@ -96,23 +100,26 @@ const PromotionProgress = () => {
         `   Mastered: ${
           progressData.filter(
             (p) =>
-              p.mentorStatus === "mastered" || p.evaluatorStatus === "mastered"
+              p.mentorStatus === EvaluationStatus.MASTER ||
+              p.evaluatorStatus === EvaluationStatus.MASTER
           ).length
         }`
       );
 
-      setRequirement(requirementData);
+      setRequirement(requirementData || null);
       setProgress(progressData);
-      setJobTitle(jobTitleData);
-      setGrade(gradeData);
+      setJobTitle(jobTitleData || null);
+      setGrade(gradeData || null);
       setTasks(tasksData);
       setSubtasks(subtasksData);
 
       // Auto-expand all tasks
-      const taskIds = new Set(
-        requirementData.required.map((req) => req.taskId)
-      );
-      setExpandedTasks(taskIds);
+      if (requirementData) {
+        const taskIds = new Set(
+          requirementData.required.map((req) => req.taskId)
+        );
+        setExpandedTasks(taskIds);
+      }
       setLastUpdated(new Date());
     } catch (error) {
       console.error("Failed to load promotion data:", error);
